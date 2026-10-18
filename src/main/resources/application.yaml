@@ -1,0 +1,6 @@
+weather:
+  api:
+    url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
+    key: "PFC9P2ZKUAU4L7NCN72R5DTST"
+    connectionTimeout: 5000
+    responseTimeout: 5000
