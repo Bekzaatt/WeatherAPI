@@ -16,7 +16,7 @@ public class GlobalExceptionHandler {
     private static final Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(BadRequestException.class)
-    public ErrorResponse badRequestExceptionHandler(BadRequestException exception){
+    public ErrorResponse badRequestExceptionHandler(BadRequestException exception) {
         logger.error("BadRequest exception, message = {}", exception.getMessage(), exception);
         return ErrorResponse
                 .builder()
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ErrorResponse notFoundExceptionHandler(NotFoundException exception){
+    public ErrorResponse notFoundExceptionHandler(NotFoundException exception) {
         logger.error("NotFound exception, message = {}", exception.getMessage(), exception);
         return ErrorResponse
                 .builder()
@@ -39,12 +39,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse runtimeExceptionHandler(RuntimeException exception){
+    public ErrorResponse runtimeExceptionHandler(RuntimeException exception) {
         logger.error("Runtime exception, message = {}", exception.getMessage(), exception);
         return ErrorResponse
                 .builder()
                 .message(exception.getMessage())
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .timestamp(LocalDateTime.now())
                 .build();
     }

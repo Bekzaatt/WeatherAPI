@@ -17,7 +17,7 @@ public class WeatherService {
 
     public WeatherModelDataRange getWeatherDataByRange(String city, LocalDate fromDate, LocalDate toDate) {
         if (fromDate.isAfter(LocalDate.now()) || toDate.isAfter(LocalDate.now()) ||
-                (fromDate.isAfter(toDate))) {
+                (fromDate.isAfter(toDate)) || city == null || city.isBlank()) {
             throw new BadRequestException("Invalid datetime");
         }
 

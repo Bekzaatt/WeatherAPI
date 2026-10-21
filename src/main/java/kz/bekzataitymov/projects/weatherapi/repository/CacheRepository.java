@@ -36,7 +36,7 @@ public class CacheRepository {
             return redisCommandsPredict
                     .get(String.format(KEY_FORECAST, cacheKey.city()));
         } catch (RedisConnectionException | RedisCommandTimeoutException exception) {
-            logger.error("Redis error", exception);
+            logger.error("Cache get error", exception);
             return null;
         }
     }
@@ -46,7 +46,7 @@ public class CacheRepository {
             this.redisCommands
                     .set(String.format(KEY, cacheKey.city(), cacheKey.fromDate(), cacheKey.toDate()), weatherModel, SetArgs.Builder.ex(10800));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Cache put error", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class CacheRepository {
             this.redisCommandsPredict
                     .set(String.format(KEY_FORECAST, cacheKey.city()), weatherModel, SetArgs.Builder.ex(10800));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Cache put error", e);
         }
     }
 }

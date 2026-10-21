@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
+import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
@@ -58,10 +59,10 @@ public class WebClientService {
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
                     if(clientResponse.statusCode() == HttpStatus.NOT_FOUND){
-                        throw new NotFoundException("Not found");
+                        Mono.error(new NotFoundException("Not found"));
                     }
                     else if(clientResponse.statusCode() == HttpStatus.BAD_REQUEST){
-                       throw  new BadRequestException("Bad request");
+                       Mono.error(new BadRequestException("Bad request"));
                     }
                     throw new RuntimeException();
                 })

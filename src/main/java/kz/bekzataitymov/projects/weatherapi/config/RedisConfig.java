@@ -52,6 +52,9 @@ public class RedisConfig {
         if(connection != null){
             connection.close();
         }
+        if(connectionPredict != null){
+            connectionPredict.close();
+        }
     }
 
 }
