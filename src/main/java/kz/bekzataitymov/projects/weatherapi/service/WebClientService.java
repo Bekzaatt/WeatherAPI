@@ -58,11 +58,10 @@ public class WebClientService {
                 .uri(this.webClientProps.getUrl() + "/{city}?key={key}", city, this.webClientProps.getKey())
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
-                    if(clientResponse.statusCode() == HttpStatus.NOT_FOUND){
+                    if (clientResponse.statusCode() == HttpStatus.NOT_FOUND) {
                         Mono.error(new NotFoundException("Not found"));
-                    }
-                    else if(clientResponse.statusCode() == HttpStatus.BAD_REQUEST){
-                       Mono.error(new BadRequestException("Bad request"));
+                    } else if (clientResponse.statusCode() == HttpStatus.BAD_REQUEST) {
+                        Mono.error(new BadRequestException("Bad request"));
                     }
                     throw new RuntimeException();
                 })

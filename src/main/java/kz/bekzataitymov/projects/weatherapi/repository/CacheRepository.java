@@ -21,17 +21,17 @@ public class CacheRepository {
     private static final String KEY = "weather:%s:%s:%s";
     private static final String KEY_FORECAST = "weather:%s";
 
-    public WeatherModelDataRange get(WeatherCacheKey cacheKey){
-         try {
-             return redisCommands
-                     .get(String.format(KEY, cacheKey.city(), cacheKey.fromDate(), cacheKey.toDate()));
-         } catch (RedisConnectionException | RedisCommandTimeoutException exception) {
-             logger.error("Redis error", exception);
-             return null;
-         }
+    public WeatherModelDataRange get(WeatherCacheKey cacheKey) {
+        try {
+            return redisCommands
+                    .get(String.format(KEY, cacheKey.city(), cacheKey.fromDate(), cacheKey.toDate()));
+        } catch (RedisConnectionException | RedisCommandTimeoutException exception) {
+            logger.error("Redis error", exception);
+            return null;
+        }
     }
 
-    public WeatherModelPredict getPredict(WeatherCacheKey cacheKey){
+    public WeatherModelPredict getPredict(WeatherCacheKey cacheKey) {
         try {
             return redisCommandsPredict
                     .get(String.format(KEY_FORECAST, cacheKey.city()));

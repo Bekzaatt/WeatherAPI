@@ -1,7 +1,6 @@
 package kz.bekzataitymov.projects.weatherapi.codec;
 
 import io.lettuce.core.codec.RedisCodec;
-import jakarta.annotation.PostConstruct;
 import kz.bekzataitymov.projects.weatherapi.model.WeatherModelDataRange;
 import tools.jackson.core.JacksonException;
 import tools.jackson.databind.ObjectMapper;
@@ -22,7 +21,7 @@ public class WeatherModelCodec implements RedisCodec<String, WeatherModelDataRan
         String json = StandardCharsets.UTF_8.decode(byteBuffer).toString();
         try {
             return OBJECT_MAPPER.readValue(json, WeatherModelDataRange.class);
-        }catch (JacksonException exception){
+        } catch (JacksonException exception) {
             throw new RuntimeException("Failed to deserialize value from Redis.", exception);
         }
     }

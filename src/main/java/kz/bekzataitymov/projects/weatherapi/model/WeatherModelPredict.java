@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeatherModelPredict{
+public class WeatherModelPredict {
     private String address;
     private String description;
     private List<Days> days;

@@ -21,7 +21,7 @@ public class WeatherModelPredictCodec implements RedisCodec<String, WeatherModel
         String json = StandardCharsets.UTF_8.decode(byteBuffer).toString();
         try {
             return OBJECT_MAPPER.readValue(json, WeatherModelPredict.class);
-        }catch (JacksonException exception){
+        } catch (JacksonException exception) {
             throw new RuntimeException("Failed to deserialize value from Redis.", exception);
         }
     }

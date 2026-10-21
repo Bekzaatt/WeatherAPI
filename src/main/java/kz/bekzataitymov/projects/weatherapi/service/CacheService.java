@@ -17,7 +17,7 @@ public class CacheService {
     private final Logger logger = LogManager.getLogger(CacheService.class);
 
     public WeatherModelDataRange get(WeatherCacheKey cacheKey) {
-        WeatherModelDataRange weatherModel= this.cacheRepository.get(cacheKey);
+        WeatherModelDataRange weatherModel = this.cacheRepository.get(cacheKey);
         if (weatherModel != null) {
             this.logger.info(new StringMapMessage()
                     .with("message", "successfully returned from cache"));

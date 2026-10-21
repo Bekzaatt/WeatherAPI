@@ -22,7 +22,7 @@ public class RedisConfig {
     private StatefulRedisConnection<String, WeatherModelPredict> connectionPredict = null;
 
     @PostConstruct
-    public StatefulRedisConnection<String, WeatherModelDataRange> getRedis(){
+    public StatefulRedisConnection<String, WeatherModelDataRange> getRedis() {
         RedisURI redisURI = RedisURI.Builder
                 .redis("localhost", 6379)
                 .withTimeout(Duration.ofSeconds(20))
@@ -35,24 +35,24 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisCommands<String, WeatherModelDataRange> getRedisCommands(){
+    public RedisCommands<String, WeatherModelDataRange> getRedisCommands() {
         return connection.sync();
     }
 
     @Bean
-    public RedisCommands<String, WeatherModelPredict> getRedisCommandsPredict(){
+    public RedisCommands<String, WeatherModelPredict> getRedisCommandsPredict() {
         return connectionPredict.sync();
     }
 
     @PreDestroy
-    private void destroy(){
-        if(redisClient != null){
+    private void destroy() {
+        if (redisClient != null) {
             redisClient.shutdown();
         }
-        if(connection != null){
+        if (connection != null) {
             connection.close();
         }
-        if(connectionPredict != null){
+        if (connectionPredict != null) {
             connectionPredict.close();
         }
     }
